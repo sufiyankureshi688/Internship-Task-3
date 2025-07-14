@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  color: #e6e6e6;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+header {
+  background: #1c1c1c;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  color: #00f0ff;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.controls select,
+.controls input,
+.controls button {
+  padding: 8px 14px;
+  background: #262626;
+  border: 1px solid #333;
+  color: #00f0ff;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.controls button:hover,
+.controls select:hover,
+.controls input:hover {
+  background: #00f0ff;
+  color: #000;
+  cursor: pointer;
+}
+
+textarea {
+  width: 95%;
+  height: calc(100vh - 200px);
+  margin: 20px auto;
+  display: block;
+  background: #121212;
+  color: #0f0;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.08);
+  resize: none;
+}

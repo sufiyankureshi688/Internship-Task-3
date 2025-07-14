@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚡ Real-Time Code Editor</title>
+
+  <!-- Google Font for clean dev look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>⚡ Real-Time Code Editor</h1>
+    <div class="controls">
+      <select id="language">
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="html">HTML</option>
+        <option value="c++">C++</option>
+      </select>
+
+      <input id="filename" type="text" placeholder="Filename..." value="myCode.js" />
+
+      <button onclick="copyCode()">📋 Copy</button>
+      <button onclick="downloadCode()">⬇️ Download</button>
+    </div>
+  </header>
+
+  <textarea id="code" placeholder="Start typing your code..."></textarea>
+
+  <!-- Socket.IO Client Script -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const textarea = document.getElementById("code");
+
+    // Send code changes to server
+    textarea.addEventListener("input", () => {
+      socket.emit("code-change", textarea.value);
+    });
+
+    // Receive code from other users
+    socket.on("code-update", (code) => {
+      textarea.value = code;
+    });
+
+    // Copy code to clipboard
+    function copyCode() {
+      navigator.clipboard.writeText(textarea.value).then(() => {
+        alert("Code copied to clipboard!");
+      });
+    }
+
+    // Download code as a file
+    function downloadCode() {
+      const blob = new Blob([textarea.value], { type: 'text/plain' });
+      const filename = document.getElementById("filename").value || "code.txt";
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    }
+  </script>
+</body>
+</html>
