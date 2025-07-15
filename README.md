@@ -25,8 +25,9 @@ Build a real-time collaborative code editor using WebSockets and Node.js, allowi
 
 ## 🚀 How to Run:
 ```bash
-npm install
+npm install express socket.io
 node server.js
+
 
 
 Then visit http://localhost:3000
